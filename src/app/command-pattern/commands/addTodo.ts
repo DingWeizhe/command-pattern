@@ -1,18 +1,18 @@
-import { Todo } from "../todo";
-import { TodoList } from "../todoList";
+// import { Todo } from "../todo";
+// import { TodoList } from "../todoList";
 import { Command } from "../command";
 
 export class AddTodoCommand extends Command {
-  constructor(public todoList: TodoList, public todo: Todo) {
+  constructor(public list: string[], public todo: string) {
     super();
   }
 
   do() {
-    this.todoList.list.push(this.todo);
+    this.list.push(this.todo);
   }
 
   undo() {
-    let idx = this.todoList.list.indexOf(this.todo);
-    this.todoList.list.splice(idx, 1);
+    let idx = this.list.indexOf(this.todo);
+    this.list.splice(idx, 1);
   }
 }

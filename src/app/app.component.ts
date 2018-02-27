@@ -1,10 +1,7 @@
 import { Component } from "@angular/core";
-import { TodoList } from "./command-pattern/todoList";
 import { Invoker } from "./command-pattern/invoker";
-import { Todo } from "./command-pattern/todo";
 import { AddTodoCommand } from "./command-pattern/commands/addTodo";
 import { RemoveTodoCommand } from "./command-pattern/commands/removeTodo";
-import { RenameTodoCommand } from "./command-pattern/commands/renameTodo";
 
 @Component({
   selector: "app-root",
@@ -12,25 +9,17 @@ import { RenameTodoCommand } from "./command-pattern/commands/renameTodo";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  list = new TodoList();
-  invoker = Invoker.getInstance();
+  list: string[] = [];
+
+  public constructor(public invoker: Invoker) {}
 
   add() {
     let name = prompt();
-    this.invoker.do(new AddTodoCommand(this.list, new Todo(name)));
+    this.invoker.do(new AddTodoCommand(this.list, name));
   }
 
-  remove(todo: Todo) {
+  remove(todo: string) {
     this.invoker.do(new RemoveTodoCommand(this.list, todo));
-  }
-
-  rename(todo: Todo) {
-    let name = prompt();
-    this.invoker.do(new RenameTodoCommand(todo, name));
-  }
-
-  redo() {
-    this.invoker.redo();
   }
 
   undo() {

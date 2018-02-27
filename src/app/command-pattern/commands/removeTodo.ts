@@ -1,19 +1,17 @@
-import { Todo } from "../todo";
-import { TodoList } from "../todoList";
 import { Command } from "../command";
 
 export class RemoveTodoCommand extends Command {
   public idx = 0;
-  constructor(public todoList: TodoList, public todo: Todo) {
+  constructor(public list: string[], public todo: string) {
     super();
   }
 
   do() {
-    this.idx = this.todoList.list.indexOf(this.todo);
-    this.todoList.list.splice(this.idx, 1);
+    this.idx = this.list.indexOf(this.todo);
+    this.list.splice(this.idx, 1);
   }
 
   undo() {
-    this.todoList.list.splice(this.idx, 0, this.todo);
+    this.list.splice(this.idx, 0, this.todo);
   }
 }

@@ -1,12 +1,10 @@
 <button (click)="add(name)">新增todo</button>
 
 <ul>
-  <li *ngFor="let todo of list.list">
-    {{ todo.name }}
-    <button (click)="rename(todo)">改名</button>
+  <li *ngFor="let todo of list">
+    {{ todo }}
     <button (click)="remove(todo)">刪除</button>
   </li>
 </ul>
 
 <button (click)="undo()">上一步</button>
-<button (click)="redo()">下一步</button>
